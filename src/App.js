@@ -1,24 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { ThemeProvider, useTheme } from '@mui/material/styles';
+import { CssBaseline, Box } from '@mui/material';
+import { inputGlobalStyles } from './globalStyles';
+import Header from './components/Header';
+import Homepage from './pages/HomePage';
+import { Routes, Route } from 'react-router-dom';
+const styles = {
+  App: {
+    background: '#261132',
+    minHeight: '100vh',
+  },
+};
 function App() {
+  const theme = useTheme();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        {inputGlobalStyles}
+        <Box sx={styles.App}>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Homepage />} />
+            {/* <Route path='/coins/:id' element={<CoinPage/>}/> */}
+          </Routes>
+        </Box>
+      </ThemeProvider>
+    </>
   );
 }
 
